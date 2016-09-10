@@ -76,30 +76,21 @@ void setup(){
   background(0);
   fill(255);
   noStroke();
+  int[][] board = new int[8][8];
 }
 
 void draw(){
-  if(numQueens<8){
-    int[][] board = new int[8][8];
-    x=0;
-    y=0;
-    while(x<8&&y<8){
-      board[x][y]=2;
-      numQueens++;
-      board=eliminateBlockedSpaces(board);
-      x++;
-      while(board[x][y]!=0){
-        y++;
+  while(posx<800){
+    while(posy<800){
+      if(yes){
+        rect(posx,posy,100,100);
       }
+      yes=!yes;
+      posy+=100;
     }
-    for(y=0;y<8;y++){
-      x=0;
-      while(x<8){
-        print(board[x][y] + ", ");
-        x++;
-      }
-      println();
-    }
+    yes=!yes;
+    posx+=100;
+    posy=0;
   }
 }
 

@@ -9,7 +9,6 @@ int size=800;
 int posx;
 int posy;
 boolean white=true;
-int board[][] = new int[8][8];
 int solutionCounter;
 List<int[]> solutionList;
 
@@ -30,15 +29,14 @@ List<int []> findSolutions(int sizeBoard) {
       if (checkSolution(board, sizeBoard));
         ListOfSolutions.add(board);  
   }
-  
  return ListOfSolutions;
 }
 
-double averageofarray(int[] board, int size) {
+double averageofarray(int[] board, int sz) {
   double average = 0;
-  for (int x=1; x<=size; x++) {
+  for (int x=1; x<=sz; x++) {
     average = average + board[x];
-    average = average/size;
+    average = average/sz;
   }
   return average;
 }
@@ -59,6 +57,10 @@ boolean checkSolution(int[] board, int size){
 }
 void drawCheckerboard() {
   fill(255);
+  while(size%dim!=0){
+    surface.setSize(size,size);
+    size++;
+  }
   while (posx<size) {
     while (posy<size) {
       if (white) rect(posx, posy,size/dim,size/dim);
@@ -69,46 +71,71 @@ void drawCheckerboard() {
     posx+=size/dim;
     posy=0;
   }
-  keyCode=0;
-  dim=0;
   fill(200, 50, 170);
-  int[] solutionArray = solutionList.get(solutionCounter);
-  for(int i=0;i<dim;i++) ellipse(size/dim*(i+1),solutionArray[i],size/dim,size/dim);
+  //int[] solutionArray = solutionList.get(solutionCounter);
+  //for(int i=0;i<dim;i++) ellipse(size/dim*(i+1),solutionArray[i],size/dim,size/dim);
 }
 
 void setup() {
-  size(800, 800);
+  size(800,800);
   surface.setResizable(true);
   background(0);
   noStroke();
   fill(255);
 }
 
-void keyPressed() {
+void draw(){      //tfw you wanted to use keyPressed() but it wont work :(
   if(keyCode==LEFT){
     solutionCounter--;
     drawCheckerboard();
+    keyCode=0;
   }
   if(keyCode==RIGHT){
     solutionCounter++;
     drawCheckerboard();
+    keyCode=0;
   }
-  if(dim!=0&&keyCode==ENTER){
-    while(size%dim!=0){
-      size++;
-      surface.setSize(size,size);
-    }
+  if(keyCode==ENTER){
     solutionList=findSolutions(dim); //<>//
     drawCheckerboard();
+    keyCode=0;
   }
-  if(key=='0') dim*=10;
-  if(key=='1') dim=dim*10+1;
-  if(key=='2') dim=dim*10+2;
-  if(key=='3') dim=dim*10+3;
-  if(key=='4') dim=dim*10+4;
-  if(key=='5') dim=dim*10+5;
-  if(key=='6') dim=dim*10+6;
-  if(key=='7') dim=dim*10+7;
-  if(key=='8') dim=dim*10+8;
-  if(key=='9') dim=dim*10+9;
+  switch(key){
+    case '1':
+      dim=1;
+      key='0';
+      break;
+    case '2':
+      dim=2;
+      key='0';
+      break;
+    case '3':
+      dim=3;
+      key='0';
+      break;
+    case '4':
+      dim=4;
+      key='0';
+      break;
+    case '5':
+      dim=5;
+      key='0';
+      break;
+    case '6':
+      dim=6;
+      key='0';
+      break;
+    case '7':
+      dim=7;
+      key='0';
+      break;
+    case '8':
+      dim=8;
+      key='0';
+      break;
+    case '9':
+      dim=9;
+      key='0';
+      break;
+  }
 }

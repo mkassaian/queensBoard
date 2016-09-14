@@ -9,6 +9,9 @@ ArrayList<int []> findSolutions(int sizeBoard) {
           board[n-1] = x%((int)pow(sizeBoard,n-1));
       }
       if (checkSolution(board, sizeBoard)){
+        for (int adder = 1; adder<=sizeBoard; adder++){
+          board[adder-1] +=1;
+        }
         ListOfSolutions.add(board);
         solutionsfound+=1;
       }
